@@ -1,5 +1,5 @@
 <?php
-// $Id: calendar_plugin_display_block.inc,v 1.1.2.11 2010/08/22 13:11:58 karens Exp $
+// $Id: calendar_plugin_display_block.inc,v 1.1.2.12 2010/12/28 15:35:50 karens Exp $
 /**
  * The plugin that handles a calendar block.
  * 
@@ -10,8 +10,8 @@
  */
 class calendar_plugin_display_block extends views_plugin_display_block {
 
-  function init(&$view, &$display) {
-    parent::init($view, $display);
+  function init(&$view, &$display, $options = NULL) {
+    parent::init($view, $display, $options);
   }
   
   /**

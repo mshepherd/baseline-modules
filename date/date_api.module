@@ -1,5 +1,5 @@
 <?php
-// $Id: date_api.module,v 1.64.2.5.2.115 2010/12/13 12:36:00 karens Exp $
+// $Id: date_api.module,v 1.64.2.5.2.121 2011/01/01 00:29:04 karens Exp $
 /**
  * @file
  * This module will make the date API available to other modules.
@@ -707,11 +707,11 @@ function date_t_strings(&$replace, $langcode) {
  *   A translated date string in the requested format.
  */
 function date_format_date($date, $type = 'medium', $format = '', $langcode = NULL) {
+  if (get_class($date) != 'DateTime') {
+    $date = date_make_date($date);
+  }
   if (empty($date)) {
     return '';
-  }
-  if (get_Class($date) != 'DateTime') {
-    $date = new DateTime($date);
   }
   
   switch ($type) {
@@ -1143,7 +1143,7 @@ function date_week_range($week, $year) {
 function date_iso_week_range($week, $year) {
   
   // Get to the last ISO week of the previous year.
-  $min_date = date_make_date(($year - 1) .'-12-27 00:00:00', date_default_timezone_name());
+  $min_date = date_make_date(($year - 1) .'-12-28 00:00:00', date_default_timezone_name());
   date_timezone_set($min_date, date_default_timezone());
   
   // Find the first day of the first ISO week in the year.
@@ -1185,12 +1185,11 @@ function date_weeks_in_year($year) {
 function date_week($date) {
   $date = substr($date, 0, 10);
   $parts = explode('-', $date);
-
   $date = date_make_date($date . ' 12:00:00', 'UTC');
   
   // If we are using ISO weeks, this is easy.
   if (variable_get('date_api_use_iso8601', FALSE)) {
-    return date_format($date, 'W');
+    return intval(date_format($date, 'W'));
   }
   
   $year_date = date_make_date($parts[0] . '-01-01 12:00:00', 'UTC');
@@ -2560,6 +2559,14 @@ function date_api_date_time_lookup() {
   $result = date_format_date(date_now(), 'custom', $_GET['format']);
   echo drupal_to_js($result);
   exit;
+}
+
+/*
+ * Test validity of a date range string.
+ */
+function date_range_valid($string) {
+  $matches = preg_match('@\-[0-9]*:[\+|\-][0-9]*@', $string);
+  return $matches < 1 ? FALSE : TRUE;
 }
 
 /**

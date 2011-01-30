@@ -6,6 +6,17 @@ See documentation at http://drupal.org/node/262064.
 Version 2.0 dev
 =================
 
+Version 6.2.4
+=============
+- Theme folder got lost in 6.2.3 release.
+
+Version 6.2.3
+=============
+- #811704 Fix broken handling of calendar links that looses track of where you are if you click around too much.
+- #720868 by dereine and KarenS, Fix argument handling for dates outside allowed range so only page views return 404.
+- #1005412 by developer-x, fix multiday date id.
+- #999708 Try to avoid fatal errors from duplicate functions when enabling the Multiday module.
+- #1003938 Fix position of multiday navigation when displayed in a block.
 - #708258 by Kars-T, remove D7 drupal_exit() call from popup.
 - #372988 by joachim, Eliminate 'broken field' message in view summary when no date link is chosen.
 - #870018 by crell, don't call date_limit_format thousands of times.

@@ -1,5 +1,5 @@
 <?php
-// $Id: date_api_filter_handler.inc,v 1.1.2.50 2010/11/20 11:49:41 karens Exp $
+// $Id: date_api_filter_handler.inc,v 1.1.2.52 2010/12/28 15:32:56 karens Exp $
 
 /**
  * A flexible, configurable date filter.
@@ -412,10 +412,12 @@ class date_api_filter_handler extends views_handler_filter_numeric {
   function set_relationship() {
     parent::set_relationship();
     $this->get_query_fields();
-    if (!empty($this->query_fields)) {
-      foreach ($this->query_fields as $query_field) {
-        $field = $query_field['field'];
-        $this->related_table_alias = $this->query->queue_table($field['table_name'], $this->relationship);
+    if (!empty($this->relationship)) {
+      if (!empty($this->query_fields)) {
+        foreach ($this->query_fields as $query_field) {
+          $field = $query_field['field'];
+          $this->related_table_alias = $this->query->queue_table($field['table_name'], $this->relationship);
+        }
       }
     }
   }

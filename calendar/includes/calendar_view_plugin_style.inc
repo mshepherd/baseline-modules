@@ -1,5 +1,5 @@
 <?php
-// $Id: calendar_view_plugin_style.inc,v 1.1.2.20 2010/11/28 23:31:28 karens Exp $
+// $Id: calendar_view_plugin_style.inc,v 1.1.2.21 2010/12/28 15:35:50 karens Exp $
 
 /**
  * Style plugin to render the year, month, week, or day calendar view.
@@ -10,8 +10,8 @@ class calendar_view_plugin_style extends calendar_plugin_style {
    * Init will be called after construct, when the plugin is attached to a
    * view and a display. 
    */
-  function init(&$view, &$display) {
-    parent::init($view, $display);
+  function init(&$view, &$display, $options = NULL) {
+    parent::init($view, $display, $options);
     $calendar_type = $this->display->handler->get_option('calendar_type');
     $view->date_info->style_name_size = $this->options['name_size'];
     $view->date_info->style_with_weekno = $this->options['with_weekno'];

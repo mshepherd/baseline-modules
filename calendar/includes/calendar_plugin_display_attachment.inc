@@ -1,5 +1,5 @@
 <?php
-// $Id: calendar_plugin_display_attachment.inc,v 1.1.2.20 2010/11/28 23:31:28 karens Exp $
+// $Id: calendar_plugin_display_attachment.inc,v 1.1.2.22 2011/01/03 02:39:05 karens Exp $
 /**
  * The plugin that handles calendar attachment displays.
  * 
@@ -22,6 +22,9 @@ class calendar_plugin_display_attachment extends views_plugin_display_attachment
    * to the style handler.
    */
   function render() {
+    if (!empty($this->view->date_info->forbid)) {
+      return '';
+    }
     return $this->view->style_plugin->render($this->view->result);
   }
   
@@ -125,7 +128,7 @@ class calendar_plugin_display_attachment extends views_plugin_display_attachment
     if (substr($display_id, 0, 14) == 'calendar_block') {
       $this->view->date_info->mini = TRUE;
       $this->view->date_info->block = TRUE;
-      $this->date_info->calendar_popup = FALSE;
+      $this->view->date_info->calendar_popup = FALSE;
       if (!isset($this->view->date_info->block_identifier)) {
         $this->view->date_info->block_identifier = 'mini';
       }

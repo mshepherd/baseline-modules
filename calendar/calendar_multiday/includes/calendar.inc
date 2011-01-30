@@ -1,5 +1,5 @@
 <?php
-//$Id: calendar.inc,v 1.1.2.1 2010/11/28 23:31:28 karens Exp $
+//$Id: calendar.inc,v 1.1.2.4 2011/01/02 00:00:56 karens Exp $
 /**
  * Build calendar
  *
@@ -135,8 +135,9 @@ function calendar_build_month(&$curday, $view, $items) {
        
         // Add the datebox
         if ($i == 0) {
+          $count = $in_month ? intval(count($multiday_buckets[$wday]) + count($singleday_buckets[$wday])) : FALSE;
           $item = array(
-            'entry' => theme('calendar_datebox', $curday_date, $view),
+            'entry' => theme('calendar_datebox', $curday_date, $view, $items, $count),
             'colspan' => 1,
             'rowspan' => 1,
             'class' => 'date-box',
@@ -460,19 +461,13 @@ function calendar_build_week_day($curday, $view, $items, $wday, &$multiday_bucke
                   $cur_cnt++;
                  
                   // Calculate the colspan for this event
-                  $start = date_make_date($cur_ydate);
-                  $end = date_make_date($end_ydate);
-                  $curday_obj = date_make_date($curday_date);
-                 
-                  // Calculate end of month
-                  $last_day = date_make_date($view->date_info->max_date_date);
  
                   // If the last day of this event exceeds the end of the current month or week,
                   // truncate the remaining days
-                  $diff = date_difference($last_day, $curday_obj, 'days');
+                  $diff = date_difference($view->date_info->max_date, $curday, 'days');
                   $remaining_days = ($view->date_info->granularity == 'month') ? min(6 - $wday, $diff) : $diff - 1;                 
                   // The bucket_cnt defines the colspan.  colspan = bucket_cnt + 1
-                  $days = date_difference($start, $end, 'days');
+                  $days = date_difference($curday, $item->date_end, 'days');
                   $bucket_cnt = max(0, min($days, $remaining_days));
                  
                   // See if there is an avaiable slot to add an event.  This will allow
@@ -487,8 +482,7 @@ function calendar_build_week_day($curday, $view, $items, $wday, &$multiday_bucke
                   }
                  
                   // Add continuation attributes
-                  $start_date = date_make_date($start_ydate);
-                  $item->continuation =  ($start_date < $curday_obj);
+                  $item->continuation =  ($item->date_start < $curday);
                   $item->continues = ( $days > $bucket_cnt );
                                  
                   // Assign the item to the available bucket

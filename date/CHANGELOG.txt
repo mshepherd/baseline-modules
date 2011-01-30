@@ -1,9 +1,20 @@
-//$Id: CHANGELOG.txt,v 1.1.8.491 2010/12/10 12:21:55 karens Exp $
+//$Id: CHANGELOG.txt,v 1.1.8.499 2011/01/03 12:47:46 karens Exp $
 Date Module 6.x
 =================
 Version 6.2-dev
 =================
 
+Version 6.2.7
+=============
+- #514242 Day repeated every two weeks was broken by wrong day comparison value.
+- Fix a bug in the calculation of the week days when using ISO weeks.
+- #549042 The date_week() function should return an integer even when using ISO weeks.
+- #575770 Fix handling of empty vs zero date parts in the date combo processing.
+- #385688 by jcmarco, Make sure we don't set relationships where there should be none.
+- Fix a strict warning for use of is_a().
+- #882980 Fix WSOD in PHP4 from date_format process to create a new date.
+- #998498 Don't try to use jquery_ui function in update if it isn't installed, add a warning message.
+- #993148 Use url() for link to date format page in date widget settings so it works without clean urls.
 - Add more date repeat tests and fix date repeat handling of day of month > 5.
 - #784854 by akeemw, fix broken date repeat handling of negative by-day computations.
 - Add functions to get a granularity precision from a granularity array or an array from a precision.

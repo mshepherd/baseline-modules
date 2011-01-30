@@ -1,5 +1,5 @@
 <?php
-// $Id: calendar-week-node.tpl.php,v 1.1.2.1 2010/11/28 23:31:28 karens Exp $
+// $Id: calendar-week-node.tpl.php,v 1.1.2.2 2010/12/31 23:31:28 karens Exp $
 /**
  * @file
  * Template to display a view item as a calendar week node.
@@ -42,7 +42,7 @@ $index = 0;
 <div class="view-item view-item-<?php print $view->name ?>">
   <div class="calendar weekview">
     <?php print theme('calendar_stripe_stripe', $node); ?>
-    <div id="<?php print $node->date_id ?>" class="contents">
+    <div class="<?php print $node->date_id ?> contents">
     <?php foreach ($fields as $field): ?>
       <?php if ($index++ == 0 && (isset($node->continuation) && $node->continuation)) : ?>
       <div class="continuation">&laquo;</div>

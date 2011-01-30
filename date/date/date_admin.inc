@@ -1,5 +1,5 @@
 <?php
-//$Id: date_admin.inc,v 1.40.2.3.2.42 2010/12/11 22:36:21 karens Exp $
+//$Id: date_admin.inc,v 1.40.2.3.2.43 2010/12/28 16:37:37 karens Exp $
 /**
  * @file
  * Date administration code.
@@ -31,7 +31,7 @@ function _date_widget_settings($op, &$field) {
           form_set_error('default_value_code2', t('The Strtotime default value for the To Date is invalid.'));
         }
       }
-      if ($field['type'] == 'date_select' && !preg_match('@\-[0-9]*:[\+|\-][0-9]*@', $field['year_range'])) {
+      if (in_array($field['widget']['type'], array('date_select', 'date_popup', 'date_select_repeat', 'date_popup_repeat')) && !date_range_valid($field['year_range'])) {
         form_set_error('year_range', t('Years back and forward must be in the format -9:+9.'));
       }
       break;

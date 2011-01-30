@@ -1,5 +1,5 @@
 <?php
-//$Id: date_elements.inc,v 1.46.2.2.2.69 2010/11/27 12:48:51 karens Exp $
+//$Id: date_elements.inc,v 1.46.2.2.2.70 2010/12/29 14:11:50 karens Exp $
 /**
  * @file
  * Date forms and form themes and validation.
@@ -434,8 +434,8 @@ function date_combo_validate($element, &$form_state) {
       $merged_date = array();
       $to_date_empty = TRUE;
       foreach ($posted[$to_field] as $part => $value) {
-        $to_date_empty = $to_date_empty && empty($value);
-        $merged_date[$part] = empty($value) ? $posted[$from_field][$part] : $value;
+        $to_date_empty = $to_date_empty && empty($value) && !is_numeric($value);
+        $merged_date[$part] = empty($value) && !is_numeric($value) ? $posted[$from_field][$part] : $value;
         if ($part == 'ampm' && $merged_date['ampm'] == 'pm' && $merged_date['hour'] < 12) {
           $merged_date['hour'] += 12;
         }

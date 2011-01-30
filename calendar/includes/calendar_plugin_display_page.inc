@@ -1,5 +1,5 @@
 <?php
-// $Id: calendar_plugin_display_page.inc,v 1.1.2.24 2010/11/29 11:38:28 karens Exp $
+// $Id: calendar_plugin_display_page.inc,v 1.1.2.25 2011/01/03 02:39:05 karens Exp $
 /**
  * The plugin that handles a full calendar page.
  * 
@@ -10,6 +10,14 @@
  */
 class calendar_plugin_display_page extends views_plugin_display_page {
   
+  function render() {
+    if (!empty($this->view->date_info->forbid)) {
+      drupal_not_found();
+      exit;
+    }
+   return parent::render();
+  }
+
   /**
    * Display validation.
    */

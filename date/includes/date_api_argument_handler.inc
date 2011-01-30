@@ -1,5 +1,5 @@
 <?php
-// $Id: date_api_argument_handler.inc,v 1.1.2.46 2010/11/20 11:49:41 karens Exp $
+// $Id: date_api_argument_handler.inc,v 1.1.2.48 2011/01/03 02:39:15 karens Exp $
 /**
  * Date API argument handler.
  */
@@ -276,10 +276,12 @@ class date_api_argument_handler extends views_handler_argument_date {
   function set_relationship() {
     parent::set_relationship();
     $this->get_query_fields();
-    if (!empty($this->query_fields)) {
-      foreach ($this->query_fields as $query_field) {
-        $field = $query_field['field'];
-        $this->related_table_alias = $this->query->queue_table($field['table_name'], $this->relationship);
+    if (!empty($this->relationship)) {
+      if (!empty($this->query_fields)) {
+        foreach ($this->query_fields as $query_field) {
+          $field = $query_field['field'];
+          $this->related_table_alias = $this->query->queue_table($field['table_name'], $this->relationship);
+        }
       }
     }
   }
@@ -338,8 +340,9 @@ class date_api_argument_handler extends views_handler_argument_date {
     
     // See if we're outside the allowed date range for our argument.
     if (date_format($min_date, 'Y') < $this->view->date_info->min_allowed_year || date_format($max_date, 'Y') > $this->view->date_info->max_allowed_year) {
-      drupal_not_found();
-      exit;
+      $this->forbid = TRUE;
+      $this->query->add_where('date', "0=1");
+      return;
     }
     
     // The second option seems to work better in the block view if 
