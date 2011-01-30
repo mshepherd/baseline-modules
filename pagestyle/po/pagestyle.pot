@@ -1,0 +1,602 @@
+# $Id: pagestyle.pot,v 1.1.2.5 2009/11/17 20:37:08 christianzwahlen Exp $
+#
+# LANGUAGE translation of Drupal (Page Style Module)
+# Copyright 2009 Zwahlen <info@zwahlendesign.ch>
+# Generated from files:
+#  pagestyle.module: n/a
+#  includes/pagestyle.admin.inc: n/a
+#  pagestyle.info: n/a
+#  includes/pagestyle.block.inc: n/a
+
+msgid ""
+msgstr ""
+"Project-Id-Version: pagestyle (5.x-1.x)\n"
+"POT-Creation-Date: 2009-11-17 17:07+0100\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: pagestyle.module:29 includes/pagestyle.admin.inc:32;32
+msgid "Page Style configuration"
+msgstr ""
+
+#: pagestyle.module:37;44;51;58;65 pagestyle.info:0 includes/pagestyle.admin.inc:30;40;55;72;73;74;90;100;131;164 includes/pagestyle.block.inc:148
+msgid "Page Style"
+msgstr ""
+
+#: pagestyle.module:37;44;169;170;226;227;298;299 includes/pagestyle.admin.inc:44;44;191;192;233;238;302;303 includes/pagestyle.block.inc:29;46;99;100;214;215;344;344;347;347;446;446;449;449
+msgid "Black"
+msgstr ""
+
+#: pagestyle.module:37;44;169;170;226;227;298;299 includes/pagestyle.admin.inc:44;44;191;192;233;238;302;303 includes/pagestyle.block.inc:29;46;99;100;214;215;344;344;347;347;446;446;449;449
+msgid "White"
+msgstr ""
+
+#: pagestyle.module:51;171;228;300 includes/pagestyle.admin.inc:44;193;243;304 includes/pagestyle.block.inc:63;101;216;350;350;452;452
+msgid "Yellow"
+msgstr ""
+
+#: pagestyle.module:51;171;228;300 includes/pagestyle.admin.inc:44;193;243;304 includes/pagestyle.block.inc:63;101;216;350;350;452;452
+msgid "Blue"
+msgstr ""
+
+#: pagestyle.module:58;167;172;229;301 includes/pagestyle.admin.inc:194;248;262;263;263;305 includes/pagestyle.block.inc:80;102;195;217;353;353;455;455
+msgid "Standard"
+msgstr ""
+
+#: pagestyle.module:311 includes/pagestyle.admin.inc:262;263 includes/pagestyle.block.inc:149
+msgid "Current Style"
+msgstr ""
+
+#: pagestyle.module:351
+msgid "jQuery Cookie plugin"
+msgstr ""
+
+#: pagestyle.module:353
+msgid "The Page Style module require the !jquery_cookie_plugin_link."
+msgstr ""
+
+#: pagestyle.module:353
+msgid "Place the plugin (%jquery_cookie_js) in the module directory \"%pagestyle_directory\"."
+msgstr ""
+
+#: pagestyle.module:19
+msgid "administer pagestyle"
+msgstr ""
+
+#: pagestyle.module:19
+msgid "access pagestyle content"
+msgstr ""
+
+#: pagestyle.module:0
+msgid "pagestyle"
+msgstr ""
+
+#: pagestyle.info:0
+msgid "Display a style changer on the page and in the browser menue for a better web accessibility."
+msgstr ""
+
+#: pagestyle.info:0
+msgid "User interface"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:14;15;145
+msgid "PHP: Hypertext Preprocessor"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:16
+msgid "My Structured Query Language"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:17;146
+msgid "Extensible Hypertext Markup Language"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:18;19;147
+msgid "Cascading Style Sheets"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:20;27;27;148
+msgid "Web Content Accessibility Guidelines"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:21;28;28;149
+msgid "Barrierefreie Informationstechnik-Verordnung"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:22
+msgid "Portable Network Graphics"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:23
+msgid "Graphic Interchange Format"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:24
+msgid "Scalable Vector Graphics"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:25
+msgid "eXperimental Computing Facility"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:26;150
+msgid "Identification"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:27;28;29;34
+msgid "External link to:"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:29;29
+msgid "Mozilla Firefox"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:30;30
+msgid "Access control"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:30
+msgid "module"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:31
+msgid "Blocks"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:33;33
+msgid "Import"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:33
+msgid "Localization"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:34;127
+msgid "Download Themes"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:34;34
+msgid "Page Style home page"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:36;37;151;152;153
+msgid "Footnote"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:40;55;72;73;74;90;100
+msgid "Screenshot of block:"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:40;55;74;74;176
+msgid "Select menu"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:41
+msgid "This module display a style changer on the page and in the browser menue for a better web accessibility."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:42
+msgid "Advantages"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:44
+msgid "Lesser effort."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:44
+msgid "No building of extra themes required!"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:44
+msgid "and"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:45
+msgid "Style changer in the browser available."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:46
+msgid "One click function."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:46
+msgid "No tutorial required."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:47
+msgid "Same handling in any browser (shortcuts)."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:48
+msgid "Adjustable."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:49
+msgid "Select menu availabe."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:50
+msgid "Display current page style."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:51
+msgid "Browser independent."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:54
+msgid "Features"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:57
+msgid "!abbr_wcag and !abbr_bitv conform. More Information on: !link_wcag and !link_bitv."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:57
+msgid "Keep the conditions:"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:59
+msgid "!abbr_wcag/!abbr_bitv 1.1: Alt text in the images."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:60
+msgid "!abbr_wcag/!abbr_bitv 3.1: Standard links with text and not images."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:61
+msgid "!abbr_wcag/!abbr_bitv 6.3: No !javascript required."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:62
+msgid "!abbr_wcag/!abbr_bitv 11.1: Open and standard code."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:63
+msgid "!abbr_wcag/!abbr_bitv 13.6: Links in a list."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:66
+msgid "No !javascript required. !jquery suppport."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:67
+msgid "No !abbr_css required."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:68
+msgid "Style display settings"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:69
+msgid "Caching mode: \"Normal\" and \"Aggressive\" compatible."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:70
+msgid "Uniform markin of menu, based on the open source browser Firefox 2.0 (!link_ff)."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:71;172
+msgid "Block type"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:72;72;174
+msgid "Text links"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:73;73;90;175
+msgid "Image links"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:76
+msgid "Themable."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:78;179
+msgid "Images are showed with !abbr_css."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:78;179
+msgid "Ideal for Web Accessibility."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:79
+msgid "No Link text, only images in the !abbr_xhtml source code with standard 0 pixel margin."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:79;122;179;256;268
+msgid "Warning"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:79
+msgid "Not for: !abbr_wcag/!abbr_bitv 3.1! If JavaScript is not activated: No image change action if the cursor move over the images!"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:83
+msgid "Requirements"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:89
+msgid "Settings"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:92;93;94;95
+msgid "Go to:"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:92;93;94;95
+msgid "Administer"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:92
+msgid "User management"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:92
+msgid "Set the different roles."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:93;95
+msgid "Site building"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:93
+msgid "Make the block \"Page Style\" visibile."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:94
+msgid "Site configuration"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:94
+msgid "Change the settings if you want."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:95
+msgid "Translate interface"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:95
+msgid "Import your language file (for German \"!de_po\") if it is necessary."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:98
+msgid "Theming"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:99
+msgid "Create Themes"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:100;122
+msgid "Image links, not in a list"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:102
+msgid "Copy the files/directorys in your theme:"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:108
+msgid "Copy the code oft the functions in your template.!abbr_php_small file:"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:115
+msgid "Rename the functions to the name of your theme (\"mytheme\") or use \"phptemplate\":"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:122
+msgid "Edit the !abbr_php and !abbr_css code in the files."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:122
+msgid "Example:"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:122
+msgid "Change the following elements:"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:122;122
+msgid "to"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:122
+msgid "!abbr_wcag/!abbr_bitv 10.5: Adjacent hyperlinks have to be separated by printable characters surrounded by spaces."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:122
+msgid "Not for: !abbr_wcag/!abbr_bitv 13.6! Links are not in a list."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:123
+msgid "Edit the images. Create your own icons. The source file is in the directory:"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:123
+msgid "!abbr_png images are for new browsers and !abbr_gif images for old browsers (!internet_explorer 6)."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:128
+msgid "Edited templates are available from the developers website:"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:130;131
+msgid "Screenshots"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:156
+msgid "Global settings"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:162
+msgid "Block title"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:165 includes/pagestyle.block.inc:152
+msgid "Theme"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:168
+msgid "Select the block title."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:179
+msgid "Select the type of block."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:179
+msgid "Images in the !abbr_xhtml source code."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:179
+msgid "Not for: !abbr_wcag/!abbr_bitv 3.1! No hover action if !javascript is not activated!"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:183
+msgid "Advanced settings"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:189
+msgid "Page Style Normal"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:197
+msgid "The default normal page style is Standard."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:202
+msgid "Support !javascript"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:204
+msgid "Support !javascript (!jquery) or only !abbr_php for caching mode: \"Normal\" and \"Aggressive\" and anonymous users."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:208
+msgid "Display message after changing page style"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:213
+msgid "Theme settings"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:214
+msgid "Enable, disable or set the display of certain page styles and elements."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:220
+msgid "Toggle display"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:221
+msgid "Enable or disable the display of certain page styles and elements."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:221;249;308
+msgid "Minimum 2 styles are required."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:227
+msgid "Subtitle"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:229
+msgid "Ideal for image links and the select menue (title as label)."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:254
+msgid "Link text"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:256
+msgid "Not for block type \"Image links\" with images in the !abbr_xhtml source code."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:260
+msgid "Display current page style text and value"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:262
+msgid "Text and value"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:262;263
+msgid "for example"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:263
+msgid "Only the value"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:264
+msgid "Hide text and value"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:265
+msgid "Remove text and value in the source code"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:268
+msgid "Not for screen readers or text browsers (text is not in the !abbr_xhtml source code)."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:272
+msgid "Display inline"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:273
+msgid "Set the display of certain page style elements to inline or normal."
+msgstr ""
+
+#: includes/pagestyle.admin.inc:279
+msgid "Subtitle, list and select menu"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:284
+msgid "Current page style"
+msgstr ""
+
+#: includes/pagestyle.admin.inc:311
+msgid "The style %style is not available in \"Style display settings\"."
+msgstr ""
+
+#: includes/pagestyle.block.inc:31;48;65;82;114;235
+msgid "The page style have not been saved, because your browser do not accept cookies."
+msgstr ""
+
+#: includes/pagestyle.block.inc:36;53;70;87
+msgid "The page style have been saved as %ps_name."
+msgstr ""
+
+#: includes/pagestyle.block.inc:119
+msgid "The page style have been saved as %pagestyle."
+msgstr ""
+
+#: includes/pagestyle.block.inc:153
+msgid "Current Theme"
+msgstr ""
+
+#: includes/pagestyle.block.inc:180
+msgid "Black/White"
+msgstr ""
+
+#: includes/pagestyle.block.inc:185
+msgid "White/Black"
+msgstr ""
+
+#: includes/pagestyle.block.inc:190
+msgid "Yellow/Blue"
+msgstr ""
+
+#: includes/pagestyle.block.inc:231
+msgid "The page style have been saved as %pagestyle_post."
+msgstr ""
+
+#: includes/pagestyle.block.inc:254
+msgid "Save"
+msgstr ""
+

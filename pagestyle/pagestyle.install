@@ -1,0 +1,151 @@
+<?php
+// $Id: pagestyle.install,v 1.1.4.6 2009/12/24 16:40:58 christianzwahlen Exp $
+
+/**
+ * @file
+ * This file update or uninstall the Page Style module.
+ */
+
+/**
+ * Implement hook_uninstall().
+ */
+function pagestyle_uninstall() {
+  setcookie("pagestyle", 76, time()-31536000, variable_get('pagestyle_cookie_domain', base_path()), "");
+  unset($_SESSION['pagestyle']);
+  variable_del('pagestyle_block_title');
+  variable_del('pagestyle_block_type');
+  variable_del('pagestyle_link_type');
+  variable_del('pagestyle_normal');
+  variable_del('pagestyle_javascript');
+  variable_del('pagestyle_message');
+  variable_del('pagestyle_cookie_expires');
+  variable_del('pagestyle_cookie_domain');
+  variable_del('pagestyle_display_subtitle');
+  variable_del('pagestyle_black_white');
+  variable_del('pagestyle_white_black');
+  variable_del('pagestyle_yellow_blue');
+  variable_del('pagestyle_standard');
+  variable_del('pagestyle_display_links');
+  variable_del('pagestyle_display_current_text_value');
+  variable_del('pagestyle_fontweight_black_white');
+  variable_del('pagestyle_fontweight_white_black');
+  variable_del('pagestyle_fontweight_yellow_blue');
+  variable_del('pagestyle_fontweight_standard');
+  variable_del('pagestyle_display_list_inline');
+  variable_del('pagestyle_display_current_inline');
+  // old variables
+  variable_del('pagestyle_list_inline');
+  variable_del('pagestyle_display_current_pagestyle');
+}
+
+/**
+ * Implement hook_update_N().
+ */
+
+/**
+ * Update 6140 for 6.x-1.4: Update variables.
+ */
+function pagestyle_update_6140() {
+  $ret = array();
+  // 1 Update variable "pagestyle_link_type".
+  if (variable_get('pagestyle_link_type', '') == "") {
+    variable_set('pagestyle_link_type', 'variable');
+    drupal_set_message(t('Page Style') .' '. t('module') .'. '. t('Update') .' #6140: '. t('Variable updated:') .' "<em>pagestyle_link_type: variable</em>".', 'status');
+  }
+  if (variable_get('pagestyle_link_type', '') == "_fix") {
+    variable_set('pagestyle_link_type', 'fix');
+    drupal_set_message(t('Page Style') .' '. t('module') .'. '. t('Update') .' #6140: '. t('Variable updated:') .' "<em>pagestyle_link_type: fix</em>".', 'status');
+  }
+  // 2 Update variable "pagestyle_list_inline".
+  if (variable_get('pagestyle_list_inline', '') == "") {
+    variable_set('pagestyle_list_inline', 'list');
+    drupal_set_message(t('Page Style') .' '. t('module') .'. '. t('Update') .' #6140: '. t('Variable updated:') .' "<em>pagestyle_list_inline: list</em>".', 'status');
+  }
+  if (variable_get('pagestyle_list_inline', '') == "_inline") {
+    variable_set('pagestyle_list_inline', 'inline');
+    drupal_set_message(t('Page Style') .' '. t('module') .'. '. t('Update') .' #6140: '. t('Variable updated:') .' "<em>pagestyle_list_inline: inline</em>".', 'status');
+  }
+  // 3 Update variable "pagestyle_display_links".
+  if (variable_get('pagestyle_display_links', '') == "") {
+    variable_set('pagestyle_display_links', 'display');
+    drupal_set_message(t('Page Style') .' '. t('module') .'. '. t('Update') .' #6140: '. t('Variable updated:') .' "<em>pagestyle_display_links: display</em>".', 'status');
+  }
+  // 4 Update variable "pagestyle_display_current_pagestyle".
+  if (variable_get('pagestyle_display_current_pagestyle', '') == "") {
+    variable_set('pagestyle_display_current_pagestyle', 'display');
+    drupal_set_message(t('Page Style') .' '. t('module') .'. '. t('Update') .' #6140: '. t('Variable updated:') .' "<em>pagestyle_display_current_pagestyle: display</em>".', 'status');
+  }
+  return $ret;
+}
+
+/**
+ * Update 6150 for 6.x-1.5: Update variables.
+ */
+function pagestyle_update_6150() {
+  $ret = array();
+  // 1 Update variable "pagestyle_javascript".
+  if (variable_get('pagestyle_javascript', 'js') == "js") {
+    variable_set('pagestyle_javascript', 1);
+    drupal_set_message(t('Page Style') .' '. t('module') .'. '. t('Update') .' #6150: '. t('Variable updated:') .' "<em>pagestyle_javascript: 1</em>".', 'status');
+  }
+  if (variable_get('pagestyle_javascript', 'js') == "js_no") {
+    variable_set('pagestyle_javascript', 0);
+    drupal_set_message(t('Page Style') .' '. t('module') .'. '. t('Update') .' #6150: '. t('Variable updated:') .' "<em>pagestyle_javascript: 0</em>".', 'status');
+  }
+  // 2 Update variable "pagestyle_display_links".
+  if (variable_get('pagestyle_display_links', 'display') == "display") {
+    variable_set('pagestyle_display_links', 1);
+    drupal_set_message(t('Page Style') .' '. t('module') .'. '. t('Update') .' #6150: '. t('Variable updated:') .' "<em>pagestyle_display_links: 1</em>".', 'status');
+  }
+  if (variable_get('pagestyle_display_links', 'display') == "display_hidden") {
+    variable_set('pagestyle_display_links', 0);
+    drupal_set_message(t('Page Style') .' '. t('module') .'. '. t('Update') .' #6150: '. t('Variable updated:') .' "<em>pagestyle_display_links: 0</em>".', 'status');
+  }
+  // 3 Update variable "pagestyle_display_list_inline".
+  if (variable_get('pagestyle_list_inline', 'list') == "list") {
+    variable_del('pagestyle_list_inline');
+    drupal_set_message(t('Page Style') .' '. t('module') .'. '. t('Update') .' #6150: '. t('Variable deleted:') .' "<del><em>pagestyle_list_inline: list</em></del>".');
+    variable_set('pagestyle_display_list_inline', 0);
+    drupal_set_message(t('Page Style') .' '. t('module') .'. '. t('Update') .' #6150: '. t('Variable added:') .' "<ins><em>pagestyle_display_list_inline: 0</em></ins>".', 'status');
+  }
+  if (variable_get('pagestyle_list_inline', 'list') == "inline") {
+    variable_del('pagestyle_list_inline');
+    drupal_set_message(t('Page Style') .' '. t('module') .'. '. t('Update') .' #6150: '. t('Variable deleted:') .' "<del><em>pagestyle_list_inline: inline</em></del>".');
+    variable_set('pagestyle_display_list_inline', 1);
+    drupal_set_message(t('Page Style') .' '. t('module') .'. '. t('Update') .' #6150: '. t('Variable added:') .' "<ins><em>pagestyle_display_list_inline: 1</em></ins>".', 'status');
+  }
+  // 4 Update variable "pagestyle_display_current_text_value".
+  if (variable_get('pagestyle_display_current_pagestyle', 'display') == "display") {
+    variable_del('pagestyle_display_current_pagestyle');
+    drupal_set_message(t('Page Style') .' '. t('module') .'. '. t('Update') .' #6150: '. t('Variable deleted:') .' "<del><em>pagestyle_display_current_pagestyle: text_value</em></del>".', 'status');
+    variable_set('pagestyle_display_current_text_value', 'text_value');
+    drupal_set_message(t('Page Style') .' '. t('module') .'. '. t('Update') .' #6150: '. t('Variable added:') .' "<ins><em>pagestyle_display_current_text_value: text_value</em></ins>".', 'status');
+  }
+  if (variable_get('pagestyle_display_current_pagestyle', 'display') == "display_hidden") {
+    variable_del('pagestyle_display_current_pagestyle');
+    drupal_set_message(t('Page Style') .' '. t('module') .'. '. t('Update') .' #6150: '. t('Variable deleted:') .' "<del><em>pagestyle_display_current_pagestyle: display_hidden</em></del>".');
+    variable_set('pagestyle_display_current_text_value', 'hidden');
+    drupal_set_message(t('Page Style') .' '. t('module') .'. '. t('Update') .' #6150: '. t('Variable added:') .' "<ins><em>pagestyle_display_current_text_value: hidden</em></ins>".', 'status');
+  }
+  return $ret;
+}
+
+/**
+ * Update 6170 for 6.x-1.7: Change the cookie domain.
+ */
+function pagestyle_update_6170() {
+  $ret = array();
+  // 1 Compatible to old cookies.
+  $link_ps_cookie_domain = '<a title="'. t('Page Style configuration') .': '. t('Cookie Domain') .'" href="'. url('admin/settings/pagestyle', array('fragment' => 'edit-pagestyle-cookie-domain-wrapper')) .'">'. t('Page Style configuration') .': '. t('Cookie Domain') .'</a>';
+  variable_set('pagestyle_cookie_domain', '/');
+  drupal_set_message(t('Page Style') .' '. t('module') .'. '. t('Update') .' #6170: '. t('Variable updated:') .' "<em>pagestyle_cookie_domain: /</em>".', 'status');
+  drupal_set_message(t('Page Style') .' '. t('module') .'. '. t('Update') .' #6170: '. t('Now editable') .': "'. t('Cookie Domain') .'" '. t('on') .' '. $link_ps_cookie_domain .'. '. t('For a compatibility to old cookies, use:') .' "/"', 'ok');
+  // 2 Compatible to old designs.
+  $link_ps_fontweight = '<a title="'.  t('Page Style configuration') .': '. t('Font weight') .'" href="'. url('admin/settings/pagestyle', array('fragment' => 'pagestyle-fontweight')) .'">'.  t('Page Style configuration') .': '. t('Font weight') .'</a>';
+  variable_get('pagestyle_fontweight_white_black', 'normal');
+  drupal_set_message(t('Page Style') .' '. t('module') .'. '. t('Update') .' #6170: '. t('Variable updated:') .' "<em>pagestyle_fontweight_white_black: normal</em>".', 'status');
+  variable_get('pagestyle_fontweight_yellow_blue', 'normal');
+  drupal_set_message(t('Page Style') .' '. t('module') .'. '. t('Update') .' #6170: '. t('Variable updated:') .' "<em>pagestyle_fontweight_yellow_blue: normal</em>".', 'status');
+  drupal_set_message(t('Page Style') .' '. t('module') .'. '. t('Update') .' #6170: '.  t('Now editable') .': "'. t('Font weight') .'" '. t('on') .' '. $link_ps_fontweight .'. '. t('For a compatibility to old designs, use:') .' "Normal"', 'ok');
+  return $ret;
+}

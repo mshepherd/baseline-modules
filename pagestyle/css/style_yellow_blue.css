@@ -1,0 +1,16 @@
+/* $Id: style_yellow_blue.css,v 1.1.1.1.2.2 2008/03/05 23:25:29 christianzwahlen Exp $ */
+
+<!--
+/* <![CDATA[ */
+
+/* body for old browser (IE 4) */
+body,
+* {
+  color: #ff0 !important;
+  background-color: #00f !important;
+  background-image: none !important;
+}
+
+/* ]]>*/
+-->
+

@@ -1,0 +1,29 @@
+<?php
+// $Id: plupload.install,v 1.1.2.1 2011/01/11 15:07:39 justintime Exp $
+
+/**
+ * @file
+ * Install, update and uninstall functions for the plupload module.
+ *
+ */
+
+function plupload_requirements($phase) {
+  $t = get_t();
+  $requirements['plupload'] = array();
+  $mod_dir = drupal_get_path('module', 'plupload');
+  $lib_dir = $mod_dir .'/plupload';
+  $js_file = $lib_dir .'/src/javascript/plupload.js';
+  if (!is_dir($lib_dir) || !is_readable($js_file)) {
+    $requirements['plupload'][] = array(
+      'title' => 'Plupload',
+      'description' => $t('The plupload library files are either missing or not readable.  Please follow the directions <a href="!link">in the README.txt file</a> regarding module installation.', array('!link' => url($mod_dir .'/README.txt'))),
+      'severity' => REQUIREMENT_ERROR,
+    );
+    if ($phase == 'runtime') {
+      // If we do this at install time, we get a misworded "currently using..." message from core.
+      // See drupal_check_module in install.inc.
+      $requirements['plupload']['value'] = 'Plupload libraries not found.';
+    }
+  }
+  return $requirements['plupload'];
+}

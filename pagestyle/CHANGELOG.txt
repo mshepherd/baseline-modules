@@ -1,0 +1,138 @@
+$Id: CHANGELOG.txt,v 1.1.2.8 2010/06/04 21:41:17 christianzwahlen Exp $
+
+Page Style 6.x Releases
+=======================
+
+Page Style 6.x-1.9, 2010-06-04
+------------------------------
+- #796170 by mgifford: Fixed display_hidden invisible to screen readers.
+- #739004 by billsdesk: Fixed CSS3 Validator Generates Warnings.
+
+Page Style 6.x-1.8, 2010-03-02
+------------------------------
+- #679098 by poehnix: Fixed jQuery switch text and background color in IE 6.
+
+Page Style 6.x-1.7, 2010-01-05
+------------------------------
+- Edited: Cookie domain required.
+- Edited: Cookie domain validation.
+- Fixed: German translation.
+
+Page Style 6.x-1.7-rc1, 2009-12-28
+----------------------------------
+- Added feature: Font weight settings for all styles.
+- Added: Description text for the default settings.
+
+Page Style 6.x-1.7-beta1, 2009-12-11
+------------------------------------
+- #648692 by mrfelton: Fixed upgrading variables.
+- Fixed: Same cookie expires in PHP and JavaScript files.
+- Added feature: Editable cookie expires and cookie domain.
+
+Page Style 6.x-1.6, 2009-11-20
+------------------------------
+- #636854 by christine1126: Fixed Appear block.
+- Optimized images and source.
+- Added feature: by Attila Turóczi. Partial translation to Hungarian
+
+Page Style 6.x-1.5, 2009-11-18
+------------------------------
+- #606406 by GiorgosK: Fixed displaying block in header.
+- #357057 by activelyOUT: Fixed title cannot be placed alongside pics of resize.
+- #502896 by multiple_prime: Fixed unwanted "messages status".
+- Fixed: Select menue.
+- Fixed: RTL on the help page.
+- Added feature: Block title "Page Style" or "Theme".
+- Added feature: Display subtitle and page style normal.
+- Added feature: Display only the current value and remove text and value in the source code.
+- Added feature: Display inline: Subtitle, list and select menu and the current page style.
+- Added feature: Uninstall function available.
+- Added feature: a:ctive and a:focus images with CSS and JavaScript.
+
+Page Style 6.x-1.4, 2009-10-02
+------------------------------
+- Added feature: No Cookies required.
+- Added feature: Configuration: No JavaScript support available.
+
+Page Style 6.x-1.4-beta1, 2009-10-01
+------------------------------------
+- Edited: Redesigned PHP and JavaScript code.
+
+Page Style 6.x-1.4-alpha1, 2009-09-17
+-------------------------------------
+- #579994 by mgifford: Fixed call_user_func_array() error.
+- #504356 by jimyhuang: Fixed jump to top of page.
+- #570532 by ramsalt: Fixed CSS class interfere with admin module.
+- #474020 by DrupalFan: Added feature: Display direction right to left (rtl) support.
+
+Page Style 6.x-1.3, 2009-08-28
+------------------------------
+- #405432 by mrfelton: Fixed empty hook_init.
+
+Page Style 6.x-1.2, 2009-04-22
+------------------------------
+- #399694 by mgifford: Fixed busted multisite.
+- #405436 by mrfelton: Fixed maintanance-theme breaks.
+- #429032 by mrfelton: Fixed W3C HTML validation fails.
+
+Page Style 6.x-1.1, 2009-03-11
+------------------------------
+- #375836 by mrfelton: Fixed split module into several smaller files.
+- #319112 by greggles: Fixed php notices.
+
+Page Style 6.x-1.0, 2009-02-01
+------------------------------
+- Stable release.
+
+Page Style 6.x-1.x-rc2, 2009-01-29
+----------------------------------
+- Added feature: Form for anonymous users.
+
+Page Style 6.x-1.x-rc1, 2009-01-08
+----------------------------------
+- Added feature: Caching mode: "Normal" and "Aggressive" compatible.
+- Added feature: Form template.
+
+Page Style 6.x-1.x-beta1 - 2008-12-24
+-------------------------------------
+- Added feature: Templates (tpl).
+
+Page Style 6.x-1.x-dev, 2008-03-05
+----------------------------------
+- For Drupal 6.x
+
+
+Page Style Releases outside Drupal CVS
+======================================
+
+Page Style 1.x, 2007-11-29
+--------------------------
+- For Drupal 5.x and 6.x.
+
+Page Style 0.1.5, 2007-11-21
+----------------------------
+- Fixed: Works on IE 6/7.
+
+Page Style 0.1.4, 2007-09-14
+----------------------------
+- Added feature: More settings.
+- Added feature: Language indipendend icon design.
+- Added: German translation.
+
+Page Style 0.1.3, 2007-08-18
+----------------------------
+- Added feature: Icons as background.
+- Added: More settings.
+
+Page Style 0.1.2, 2007-08-01
+----------------------------
+- Added: Gnome 2.18 icons.
+
+Page Style 0.1.1, 2007-07-28
+----------------------------
+- Added feature: Display the current page style.
+- Added feature: Settings in Drupal: "Page Style Normal".
+
+Page Style 0.1.0, 2007-07-25
+----------------------------
+- First release.
