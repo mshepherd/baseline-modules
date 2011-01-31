@@ -1,0 +1,13 @@
+Empty paragraph killer x.x-x.x, xxxx-xx-xx
+------------------------------
+
+
+Empty paragraph killer 6.x-1.0-beta1, 2010-11-26
+------------------------------
+#982224 Initial release
+
+
+Empty paragraph killer 6.x-1.x-dev, 2010-12-09
+------------------------------
+#982588 by brianmercer, siliconmeadow. Added ability to purge the space
+at the beginning of a paragraph.
