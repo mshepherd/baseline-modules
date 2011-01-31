@@ -1,5 +1,5 @@
 <?php
-// $Id: node_gallery.module,v 1.18.2.152 2010/12/22 17:34:27 justintime Exp $
+// $Id: node_gallery.module,v 1.18.2.155 2011/01/08 16:04:57 justintime Exp $
 
 // @todo Need to replace gid with ngid or similar to allow coexistence with OG.
 // @todo RSS testing
@@ -204,6 +204,13 @@ function node_gallery_menu() {
     'file' => 'node_gallery.pages.inc',
     'weight' => -4,
     'type' => MENU_LOCAL_TASK,
+  );
+  $items['node-gallery/json/gallery/create'] = array(
+    'page callback' => 'node_gallery_json_create_gallery',
+    'page arguments' => array(4),
+    'access callback' => TRUE,
+    'file' => 'node_gallery.pages.inc',
+    'type' => MENU_CALLBACK,
   );
   $items['node-gallery/json/gallery/%node_gallery_gallery/sort'] = array(
     'page callback' => 'node_gallery_json_get_sorted_images',
@@ -587,7 +594,13 @@ function node_gallery_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
           // publish status changed
           _node_gallery_set_publish($node, $node->status);
         }
-        drupal_write_record('node_gallery_galleries', $node, 'gid');
+        $gallery_exists = db_result(db_query('SELECT gid FROM {node_gallery_galleries} WHERE gid = %d', $node->nid));
+        if ($gallery_exists) {
+          drupal_write_record('node_gallery_galleries', $node, 'gid');
+        }
+        else {
+          drupal_write_record('node_gallery_galleries', $node);
+        }
       }
       break;
     case 'presave':
@@ -866,6 +879,9 @@ function node_gallery_batch_node_save($nodes, &$context) {
 function node_gallery_image_process_finished($success, $results, $operations) {
   if ($success) {
     drupal_set_message(t('Image modifications complete.'));
+    cache_clear_all();
+    _field_file_cache(NULL, TRUE);
+    content_clear_type_cache();
   }
   else {
     // An error occurred.

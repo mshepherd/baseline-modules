@@ -1,5 +1,5 @@
 <?php
-// $Id: node_gallery.pages.inc,v 1.12.2.78 2010/12/22 17:34:27 justintime Exp $
+// $Id: node_gallery.pages.inc,v 1.12.2.87 2011/01/19 01:30:54 justintime Exp $
 
 /**
  * @file
@@ -8,10 +8,31 @@
  */
 
 function node_gallery_upload_image_to_new_gallery_form($image_type) {
+  drupal_set_message(t('Using this wizard, a gallery will be created automatically during upload. Please remember to enter a correct title on the next screen.'));
   $relationship = node_gallery_get_relationship(NULL, $image_type);
-  $gallery = _node_gallery_create_new_gallery($relationship['gallery_type']);
-  $gallery->edit_after_plupload = TRUE;
-  return node_gallery_upload_image_form($gallery);
+  $gallery = array(
+    'nid' => -1,
+    'type' => $relationship['gallery_type'],
+    'edit_after_plupload' => TRUE,
+  );
+  return node_gallery_upload_image_form((object)$gallery);
+}
+
+/**
+ * Javascript page callback to create an empty gallery.
+ *
+ * @param String $gallery_type
+ *  The type of the gallery to create.
+ * @return
+ *  Json encoded newly created gallery.
+ */
+function node_gallery_json_create_gallery($gallery_type) {
+  $gallery = (object)array('type' => $gallery_type);
+  if (!node_gallery_user_access('create', $gallery)) {
+    return drupal_json(array('is_error' => 1, 'message' => t("You don't have permission to create a gallery.")));
+  }
+  $gallery = _node_gallery_create_new_gallery($gallery_type);
+  drupal_json($gallery);
 }
 
 /**
@@ -26,12 +47,14 @@ function node_gallery_upload_image_to_new_gallery_form($image_type) {
 function node_gallery_upload_image_form($gallery) {
   global $user;
 
-  drupal_set_breadcrumb(array(
-    l(t('Home'), NULL),
-    l(t('Galleries'), 'galleries'),
-    l(t('!user\'s Galleries', array('!user' => $gallery->name)), 'galleries/' . $gallery->uid),
-    l($gallery->title, 'node/'. $gallery->nid)
+  if ($gallery->nid > 0) {
+    drupal_set_breadcrumb(array(
+      l(t('Home'), NULL),
+      l(t('Galleries'), 'galleries'),
+      l(t('!user\'s Galleries', array('!user' => $gallery->name)), 'galleries/' . $gallery->uid),
+      l($gallery->title, 'node/'. $gallery->nid)
     ));
+  }
   $relationship = node_gallery_get_relationship($gallery->type);
 
   if (module_exists('plupload') && variable_get('node_gallery_plupload_integration', TRUE)) {
@@ -44,7 +67,8 @@ function node_gallery_upload_image_form($gallery) {
     else {
       if ($gallery->edit_after_plupload) {
         $settings = array(
-          'redirectTarget' => url('node/'. $gallery->nid .'/edit'),
+          'gid' => $gallery->nid,
+          'galleryType' => $gallery->type,
         );
         drupal_add_js(array('node_gallery' => $settings), 'setting');
         drupal_add_js(drupal_get_path('module', 'node_gallery') .'/js/ng_plupload.js');
@@ -191,7 +215,10 @@ function node_gallery_manage_images_form($form_state, $gallery) {
     $images = $chunks[$pager_page_array[$element]];
   }
   $pager_total[$element] = count($chunks);
-
+  $enable_rotation = FALSE;
+  if ($relationship['settings']['manage_images_enable_rotation'] && (imageapi_default_toolkit() != 'imageapi_gd' || function_exists("imagerotate"))) {
+    $enable_rotation = TRUE;
+  }
   if (!empty($images)) {
     $count = 0;
     $form['images']['#tree'] = TRUE;
@@ -204,6 +231,22 @@ function node_gallery_manage_images_form($form_state, $gallery) {
       $image = node_load($nid);
       $options[$nid] = '';
       $form['images'][$nid]['remove'] = array('#type' => 'checkbox', '#default_value' => $file->remove);
+      if ($enable_rotation) {
+        $form['images'][$nid]['rotate'] = array(
+          '#type' => 'radios',
+          '#options' => array(
+            0 => t('None'),
+            90 => t('90° CW'),
+            270 => t('90° CCW'),
+            180 => t('180°')
+          ),
+          '#default_value' => 0,
+        );
+        if (module_exists('jquery_ui')) {
+          // add a link to a jquery ui dialog with previews
+          $form['images'][$nid]['rotate']['#suffix'] = '<a href="#" class="ng3-rotate-link" rel="'. imagecache_create_path('node-gallery-thumbnail', $image->{$relationship['imagefield_name']}[0]['filepath']) .'" />rotate</a>';
+        }
+      }
       if ($relationship['settings']['manage_images_show_gallery_list']) {
         $form['images'][$nid]['gid'] = array('#type' => 'select', '#title' => t('Gallery'), '#default_value' => $gallery->nid, '#options' => $gallery_list);
       }
@@ -312,6 +355,21 @@ function node_gallery_manage_images_submit(&$form, &$form_state) {
     else {
       if (node_gallery_images_check_update($form['images'][$image_node->nid]['edit_form']['#node'], $image_node, $compare_fields)) {
         $op_images['update'][] = $image_node;
+        // Setting oldgid and newgid on our node clears caches on node_save
+        if ($relationship['settings']['manage_images_show_gallery_list']) {
+          if ($form['images'][$image_node->nid]['edit_form']['#node']->gid != $image_node->gid) {
+            $image_node->oldgid = $form['images'][$image_node->nid]['edit_form']['#node']->gid;
+            $image_node->newgid = $image_node->gid;
+          }
+        }
+      }
+    }
+    if ($form_values['rotate']) {
+      $allowed_degrees = array('90', '270', '180');
+      $degrees = (int)$form_values['rotate'];
+      if (in_array($degrees, $allowed_degrees)) {
+        $node = $form['images'][$image_node->nid]['edit_form']['#node'];
+        $op_images['rotate'][] = array($node->{$relationship['imagefield_name']}[0]['filepath'], $degrees);
       }
     }
   }
@@ -322,6 +380,10 @@ function node_gallery_manage_images_submit(&$form, &$form_state) {
   while (!empty($op_images['delete'])) {
     $nid = array_shift($op_images['delete']);
     $operations[] = array('node_gallery_image_delete_process', array($nid));
+  }
+  while (!empty($op_images['rotate'])) {
+    $params = array_shift($op_images['rotate']);
+    $operations[] = array('node_gallery_batch_rotate_callback', $params);
   }
   if (!empty($operations)) {
     $batch = array(
@@ -340,7 +402,8 @@ function node_gallery_manage_images_submit(&$form, &$form_state) {
     $form_state['values']['form_build_id'] = $tmp;
     $form = array();
   }
-  $form_state['redirect'] = 'node/'. $image_node->gid;
+  $gid = isset($image_node->oldgid) ? $image_node->oldgid : $image_node->gid;
+  $form_state['redirect'] = 'node/'. $gid;
 }
 
 /**
@@ -351,9 +414,41 @@ function node_gallery_manage_images_submit(&$form, &$form_state) {
  * @param unknown_type $compare_fields
  * @return unknown
  */
-function node_gallery_images_check_update($old_image, $new_image, $compare_fields) {
+function node_gallery_images_check_update($old_image, $_new_image, $compare_fields) {
+  // a list of node attributes that are flattened one level by node_save
+  $flattened_attributes = array('options');
+  
+  $new_image = drupal_clone($_new_image);
   $new_image = node_submit($new_image);
+
+  if ($extra = node_invoke($new_image, 'presave')) {
+    foreach ($extra as $key => $value) {
+      $new_image->$key = $value;
+    }
+  }
+  if ($extra = node_invoke_nodeapi($new_image, 'presave')) {
+    foreach ($extra as $key => $value) {
+      $new_image->$key = $value;
+    }
+  }
+  if ($extra = node_invoke($old_image, 'presave')) {
+    foreach ($extra as $key => $value) {
+      $old_image->$key = $value;
+    }
+  }
+  if ($extra = node_invoke_nodeapi($old_image, 'presave')) {
+    foreach ($extra as $key => $value) {
+      $old_image->$key = $value;
+    }
+  }
+
   foreach ($compare_fields as $f) {
+    if (in_array($f, $flattened_attributes)) {
+      // We make the old node look like the new one, ie $old_node->options['status'] = $old_node->status
+      foreach (array_keys($new_image->{$f}) as $option) {
+        $old_image->{$f}[$option] = $old_image->$option;
+      }
+    }
     //a hack for cck field validate;
     if (is_array($new_image->{$f})) {
       foreach ($new_image->{$f} as &$ff) {
@@ -371,7 +466,6 @@ function node_gallery_images_check_update($old_image, $new_image, $compare_field
         continue;
       }
     }
-    // @todo: Workflow doesn't work here
     if ($new_image->{$f} != $old_image->{$f}) {
       return TRUE;
     }
@@ -392,7 +486,7 @@ function node_gallery_image_item_edit_form($form_values, $image, $relationship) 
   $display_fields['#node'] = '#node';
 
   foreach (array_values($display_fields) as $field_name) {
-    if (!empty($field_name)) {
+    if (!empty($field_name) && !empty($form[$field_name])) {
       $item_form[$field_name] = $form[$field_name];
     }
   }
@@ -614,7 +708,7 @@ function node_gallery_sort_images_form_remove_weights_submit($form, &$form_state
 function node_gallery_sort_images_form_submit($form, &$form_state) {
   $images = array();
   $gid = $form_state['values']['gid'];
-  if (!empty($form_state['values']['new_sort'])) {
+  if ($form_state['values']['jquery_ui_integration']) {
     // jquery ui grid data
     $new_sort = explode(',', $form_state['values']['new_sort']);
     $original_sort = explode(',', $form_state['values']['original_sort']);

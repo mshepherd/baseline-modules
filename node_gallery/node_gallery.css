@@ -1,4 +1,4 @@
-/* $Id: node_gallery.css,v 1.4.2.12 2010/12/18 02:45:56 justintime Exp $ */
+/* $Id: node_gallery.css,v 1.4.2.14 2011/01/31 04:56:16 justintime Exp $ */
 
 .image-navigator tr {background:#fff}
 
@@ -9,7 +9,46 @@ table.image-navigator td.image-navigator-next {width:15%; text-align:right}
 table.image-navigator td.image-navigator-last {width:15%; text-align:left}
 table.image-navigator td.image-navigator-gallery-link {width:20%; text-align:right}
 
+/**
+ * Helper classes *not* meant for styling.
+ */
 .ng3-hidden { display:none; }
+
+.ng3-rotate-90 {
+  transform:rotate(90deg);
+  -moz-transform:rotate(90deg);
+  -webkit-transform:rotate(90deg);
+  -o-transform:rotate(90deg);
+  -ms-filter:"progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
+  filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+}
+
+.ng3-rotate-180 {
+  transform:rotate(180deg);
+  -moz-transform:rotate(180deg);
+  -webkit-transform:rotate(180deg);
+  -o-transform:rotate(180deg);
+  -ms-filter:"progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
+  filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+}
+
+.ng3-rotate-270 {
+  transform:rotate(-90deg);
+  -moz-transform:rotate(-90deg);
+  -webkit-transform:rotate(-90deg);
+  -o-transform:rotate(-90deg);
+  -ms-filter:"progid:DXImageTransform.Microsoft.BasicImage(rotation=3)";
+  filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
+#node-gallery-rotate-dialog img {
+  margin: 10px;
+  border: 1px solid #000;
+}
+
+#node-gallery-rotate-dialog img.selected {
+  outline: 5px solid #000;
+}
 
 /**
  * Fix for word-wrap on the manage images page.

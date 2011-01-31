@@ -1,5 +1,5 @@
 <?php
-// $Id: node_gallery.install,v 1.19.2.70 2010/12/22 17:34:27 justintime Exp $
+// $Id: node_gallery.install,v 1.19.2.72 2011/01/08 15:52:51 justintime Exp $
 
 /**
  * @file
@@ -806,4 +806,29 @@ function node_gallery_update_6303() {
     }
     cache_clear_all('*', 'cache_views');
     return $ret;
+}
+
+function node_gallery_update_6304() {
+  /* http://drupal.org/node/1008006
+   * NG2 didn't add a gallery to the table until it contained images.  This update hook gets
+   * those empty (or otherwise missing) galleries into the table.
+   */
+  $ret = array();
+  $types = array();
+  $result = db_query('SELECT gallery_type FROM {node_gallery_relationships}');
+  while ($row = db_fetch_array($result)) {
+    $types[] = $row['gallery_type'];
+  }
+  $sql = 'SELECT nid as gid FROM {node} n LEFT JOIN {node_gallery_galleries} ng on ng.gid = n.nid WHERE n.type IN ('. db_placeholders($types, 'varchar') .') AND ng.gid IS NULL';
+  $result = db_query($sql, $types);
+  $count = 0;
+  while ($gallery = db_fetch_object($result)) {
+    if (drupal_write_record('node_gallery_galleries', $gallery)) {
+      $count++;
+    }
+  }
+  if ($count > 0) {
+    $ret[] = array('success' => TRUE, 'query' => t('Added !count empty galleries into node_gallery_galleries table.', array('!count' => $count)));
+  }
+  return $ret;
 }

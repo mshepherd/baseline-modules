@@ -1,5 +1,5 @@
 <?php
-// $Id: theme.inc,v 1.2.2.46 2010/12/22 17:34:27 justintime Exp $
+// $Id: theme.inc,v 1.2.2.47 2011/01/08 16:04:57 justintime Exp $
 
 /**
  * @file
@@ -11,9 +11,21 @@ function theme_node_gallery_manage_images_form($form) {
   drupal_add_js('misc/tableselect.js');
   // get fieldname to retrieve the filepath for the thumbnail without loading the node
   $relationship = node_gallery_get_relationship($form['#gallery']->type);
+  $enable_rotation = FALSE;
+  if ($relationship['settings']['manage_images_enable_rotation'] && (imageapi_default_toolkit() != 'imageapi_gd' || function_exists("imagerotate"))) {
+    $enable_rotation = TRUE;
+    if (module_exists('jquery_ui')) {
+      drupal_add_css(drupal_get_path('module', 'jquery_ui') .'/jquery.ui/themes/default/ui.all.css');
+      jquery_ui_add(array('ui.dialog', 'ui.draggable', 'ui.resizable'));
+    }
+    drupal_add_js(drupal_get_path('module', 'node_gallery') .'/js/ng_manage_images.js');
+  }
   $field_name = $relationship['imagefield_name'];
   $thumb_imagecache = $form['#thumb_imagecache'];
   $header = array(array('data' => t('Delete'), 'class' => 'select-all'), t('Preview'), t('Edit'), t('Cover'));
+  if ($enable_rotation) {
+    $header = array(array('data' => t('Delete'), 'class' => 'select-all'), t('Preview'), t('Edit'), t('Rotation'), t('Cover'));
+  }
   foreach (element_children($form['images']) as $nid) {
     $element = &$form['images'][$nid];
     $filepath = node_gallery_get_image_filepath($element['edit_form']['nid']['#value'], $field_name);
@@ -26,6 +38,9 @@ function theme_node_gallery_manage_images_form($form) {
       $edit .= drupal_render($element['gid']);
     }
     $row[] = $edit;
+    if ($enable_rotation) {
+      $row[] = drupal_render($element['rotate']);
+    }
     if ($form['is_cover']) {
       $row[] = drupal_render($form['is_cover'][$nid]);
     }

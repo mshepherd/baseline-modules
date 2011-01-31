@@ -1,5 +1,5 @@
 <?php
-// $Id: node_gallery.admin.inc,v 1.11.2.51 2010/12/22 17:34:27 justintime Exp $
+// $Id: node_gallery.admin.inc,v 1.11.2.52 2011/01/08 16:04:57 justintime Exp $
 
 /**
  * @file
@@ -377,6 +377,14 @@ function node_gallery_relationship_settings_form($form_state, $relationship) {
     '#default_value' => $relationship['settings']['manage_images_show_gallery_list'],
     '#description' => t('If checked, a gallery dropdown list will be displayed on each image on the Manage Images tab allowing you to move images between galleries.'),
   );
+  if (imageapi_default_toolkit() != 'imageapi_gd' || function_exists("imagerotate")) {
+    $form['node_gallery_manage_images_settings']['manage_images_enable_rotation'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Enable the rotation of images on the manage images page'),
+      '#default_value' => $relationship['settings']['manage_images_enable_rotation'],
+      '#description' => t('If checked, image rotation operations will be displayed on each image on the Manage Images tab.'),
+    );
+  }
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Save'),

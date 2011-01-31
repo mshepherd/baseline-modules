@@ -1,5 +1,5 @@
 <?php
-// $Id: node_gallery.inc,v 1.2.2.95 2010/12/22 17:34:27 justintime Exp $
+// $Id: node_gallery.inc,v 1.2.2.98 2011/01/19 00:39:34 justintime Exp $
 
 /**
  * @file
@@ -152,6 +152,7 @@ function node_gallery_relationship_settings_defaults() {
     'manage_images_fields' => array('title' => 'title'),
     'manage_images_per_page' => 20,
     'manage_images_show_gallery_list' => TRUE,
+    'manage_images_enable_rotation' => TRUE,
   );
   drupal_alter('node_gallery_relationship_default_settings', $settings);
   return $settings;
@@ -322,7 +323,8 @@ function node_gallery_get_image_nids($gid, $sorted = TRUE, $filtered = TRUE, $fa
             }
             $view->build();
             if (isset($view->query->fields['nid'])) {
-              $sql = $view->build_info['query'];
+              // This is for Views2 and Views3 compatability: http://drupal.org/node/1029840
+              $sql = isset($view->query->final_query) ? $view->query->final_query : $view->build_info['query'];
             }
             else {
               $message = t('Found the image sort view, but the \'Node: Nid\' field wasn\'t found.', array());
@@ -897,7 +899,7 @@ function _node_gallery_create_new_gallery($content_type) {
   $node = new stdClass;
   $node->type = $content_type;
   node_object_prepare($node);
-  $node->title = '';
+  $node->title = 'Unnamed Gallery';
   $node->name = $user->name;
   node_save($node);
   return $node;
@@ -1020,6 +1022,39 @@ function node_gallery_batch_sorting_finished($success, $results, $operation) {
   }
   node_gallery_clear_gallery_caches($results['gid']);
   drupal_set_message($message);
+}
+
+function node_gallery_batch_rotate_callback($filepath, $degrees, &$context) {
+  $result = 0;
+  $image = imageapi_image_open($filepath);
+  if ($image !== FALSE) {
+    if (imageapi_default_toolkit() == 'imageapi_imagemagick') {
+      $result = imageapi_image_rotate($image, $degrees, 0x000000);
+    }
+    else {
+      $result = imageapi_image_rotate($image, $degrees);
+    }
+    global $conf;
+    $conf['imageapi_jpeg_quality'] = 100;
+    imageapi_image_close($image);
+    imagecache_image_flush($filepath);
+    // add a _r$i to the filename for cache distinction of rotated images
+    $filepath_new = preg_replace_callback(
+        "/(_r([0-9]+))?(\.(.+))$/",
+        create_function('$matches', '$i = ((int)$matches[2] > 0) ? ((int)$matches[2])+1 : 1; return "_r".$i.$matches[3];'),
+        $filepath);
+    $file = (object)field_file_load($filepath);
+    $file->timestamp = time();
+    $file->filepath = $filepath_new;
+    $file->filename = basename($filepath_new);
+    $filepath_old = $filepath;
+    file_move($filepath, $filepath_new);
+    drupal_write_record('files', $file, 'fid');
+  }
+  else {
+    watchdog('node_gallery', t('Could not open image for rotation'));
+  }
+  $context['results'][] = $result;
 }
 
 /**

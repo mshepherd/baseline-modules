@@ -1,5 +1,5 @@
 <?php
-// $Id: node_gallery.token.inc,v 1.3.2.4 2010/12/22 17:34:27 justintime Exp $
+// $Id: node_gallery.token.inc,v 1.3.2.5 2011/01/04 22:20:14 justintime Exp $
 
 /**
  * @file
@@ -16,6 +16,7 @@ function node_gallery_token_list($type = 'all') {
     $tokens['node']['parent-node-gallery-path-raw'] = t('Unfiltered path of the parent Gallery.  WARNING - raw user input.');
     $tokens['node']['parent-node-gallery-title'] = t('The title of the parent Gallery.');
     $tokens['node']['parent-node-gallery-title-raw'] = t('Unfiltered title of the parent Gallery.  WARNING - raw user input.');
+    $tokens['node']['parent-node-gallery-nid'] = t('The NID of the parent Gallery.');
     return $tokens;
   }
 }
@@ -42,6 +43,7 @@ function node_gallery_token_values($type, $object = NULL, $options = array()) {
       $tokens['parent-node-gallery-path-raw'] = $parent_path;
       $tokens['parent-node-gallery-title'] = decode_entities(check_plain($parent_title));
       $tokens['parent-node-gallery-title-raw'] = $parent_title;
+      $tokens['parent-node-gallery-nid'] = $object->gid;
     }
     return $tokens;
   }
