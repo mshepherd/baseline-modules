@@ -1,5 +1,5 @@
 <?php
-// $Id: node_gallery.pages.inc,v 1.12.2.87 2011/01/19 01:30:54 justintime Exp $
+// $Id: node_gallery.pages.inc,v 1.12.2.88 2011/01/31 19:52:34 justintime Exp $
 
 /**
  * @file
@@ -250,6 +250,9 @@ function node_gallery_manage_images_form($form_state, $gallery) {
       if ($relationship['settings']['manage_images_show_gallery_list']) {
         $form['images'][$nid]['gid'] = array('#type' => 'select', '#title' => t('Gallery'), '#default_value' => $gallery->nid, '#options' => $gallery_list);
       }
+      else {
+        $form['images'][$nid]['gid'] = array('#type' => 'value', '#value' => $gallery->nid);
+      }
       $form['images'][$nid]['edit_form'] = node_gallery_image_item_edit_form($form_state['values']['images'][$nid]['edit_form'], $image, $relationship);
       //Some CCK widgets need to have #field_info populated
       if (!isset($form['#field_info'])) {
@@ -348,7 +351,7 @@ function node_gallery_manage_images_submit(&$form, &$form_state) {
     node_gallery_set_gallery_cover_image($image);
   }
   foreach ($form_state['values']['images'] as $nid => $form_values) {
-    $image_node = (object)($form_values['edit_form']+array('gid' => $form_values['gid']));
+    $image_node = (object)(array_merge($form_values['edit_form'], array('gid' => $form_values['gid'])));
     if ($form_values['remove']) {
       $op_images['delete'][] = $image_node->nid;
     }
