@@ -1,4 +1,4 @@
-/* $Id: pagestyle.css,v 1.2.2.13 2010/05/26 08:55:24 christianzwahlen Exp $ */
+/* $Id: pagestyle.css,v 1.2.2.14 2011/02/03 19:51:29 christianzwahlen Exp $ */
 
 /* subtitle */
 div.block-pagestyle div h3.list {
@@ -198,7 +198,7 @@ a.pagestyle_black_white:visited  {
   min-height: 16px; /* NOTE icon specific */
   height: 1em; /* NOTE icon specific (16px = 1em) */
   background-color: transparent;
-  background-image: url("images/black_white.gif");
+  background-image: url("images/black_white.gif") !important; /* !important for page style module */
   background-repeat: no-repeat;
   background-position: 0 0px;
 }
@@ -213,7 +213,7 @@ a.pagestyle_white_black:visited {
   min-height: 16px; /* NOTE icon specific */
   height: 1em; /* NOTE icon specific (16px = 1em) */
   background-color: transparent;
-  background-image: url("images/white_black.gif");
+  background-image: url("images/white_black.gif") !important; /* !important for page style module */
   background-repeat: no-repeat;
   background-position: 0px 0px;
 }
@@ -228,7 +228,7 @@ a.pagestyle_yellow_blue:visited {
   min-height: 16px; /* NOTE icon specific */
   height: 1em; /* NOTE icon specific (16px = 1em) */
   background-color: transparent;
-  background-image: url("images/yellow_blue.gif");
+  background-image: url("images/yellow_blue.gif") !important; /* !important for page style module */
   background-repeat: no-repeat;
   background-position: 0px 0px;
 }
@@ -243,7 +243,7 @@ a.pagestyle_standard:visited {
   min-height: 16px; /* NOTE icon specific */
   height: 1em; /* NOTE icon specific (16px = 1em) */
   background-color: transparent;
-  background-image: url("images/standard.gif");
+  background-image: url("images/standard.gif") !important; /* !important for page style module */
   background-repeat: no-repeat;
   background-position: 0px 0px;
 }
