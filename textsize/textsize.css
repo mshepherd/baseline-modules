@@ -1,4 +1,4 @@
-/* $Id: textsize.css,v 1.1.1.2.2.9 2010/05/26 08:56:25 christianzwahlen Exp $ */
+/* $Id: textsize.css,v 1.1.1.2.2.10 2011/02/03 19:52:31 christianzwahlen Exp $ */
 
 /* subtitle */
 div.block-textsize div h3.list {
@@ -195,7 +195,7 @@ a.textsize_increase:visited  {
   min-height: 16px; /* NOTE icon specific */
   height: 1em; /* NOTE icon specific (16px = 1em) */
   background-color: transparent;
-  background-image: url("images/increase.gif");
+  background-image: url("images/increase.gif") !important; /* !important for page style module */
   background-repeat: no-repeat;
   background-position: 0 0px;
 }
@@ -210,7 +210,7 @@ a.textsize_decrease:visited {
   min-height: 16px; /* NOTE icon specific */
   height: 1em; /* NOTE icon specific (16px = 1em) */
   background-color: transparent;
-  background-image: url("images/decrease.gif");
+  background-image: url("images/decrease.gif") !important; /* !important for page style module */
   background-repeat: no-repeat;
   background-position: 0px 0px;
 }
@@ -225,7 +225,7 @@ a.textsize_normal:visited {
   min-height: 16px; /* NOTE icon specific */
   height: 1em; /* NOTE icon specific (16px = 1em) */
   background-color: transparent;
-  background-image: url("images/normal.gif");
+  background-image: url("images/normal.gif") !important; /* !important for page style module */
   background-repeat: no-repeat;
   background-position: 0px 0px;
 }
