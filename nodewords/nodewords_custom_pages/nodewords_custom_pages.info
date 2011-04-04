@@ -1,0 +1,12 @@
+name = Meta tags for custom pages
+description = Allow to set meta tags for any pages for which is known the URL.
+package = Meta tags
+dependencies[] = nodewords
+core = 6.x
+
+; Information added by drupal.org packaging script on 2011-03-13
+version = "6.x-1.x-dev"
+core = "6.x"
+project = "nodewords"
+datestamp = "1300018179"
+
